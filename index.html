@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bubble</title>
+    <style>
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-image: radial-gradient(ellipse at center bottom,
+          #00EEEE	,
+          #00CDCD	,
+          #008B8B	,
+          #97FFFF	,
+          #8DEEEE	,
+          #79CDCD	,
+          #528B8B	,
+          #7FFFD4	,
+          #76EEC6	,
+          #66CDAA	,
+          #458B74	,
+          #C1FFC1	,
+          #B4EEB4	,
+          #9BCD9B	,
+          #698B69	,
+          #54FF9F	,
+          #4EEE94	,
+          #43CD80	,
+          #2E8B57	,
+          #9AFF9A	,
+          #90EE90	,
+          #7CCD7C	,
+          #548B54	,
+          #00FF7F	,
+          #00EE76	,
+          #00CD66	,
+          #008B45	,
+          #00FF00	,
+          #00EE00	,
+          #00CD00	,
+          #008B00	,
+          #7FFF00	,
+          #76EE00	,
+          #66CD00	,
+          #458B00	,
+          #C0FF3E	,
+          #B3EE3A	,
+          #9ACD32	,
+          #698B22	,
+          #CAFF70	,
+          #BCEE68	,
+          #A2CD5A	,
+          #6E8B3D	,
+          #FFF68F	,
+          #EEE685	,
+          #CDC673	,
+          #8B864E	,
+          #FFEC8B	,
+          #EEDC82	,
+          #CDBE70	,
+          #8B814C	,
+          #FFFFE0	,
+          #EEEED1	,
+          #CDCDB4	,
+          #8B8B7A	,
+          #FFFF00	,
+          #EEEE00	,
+          #CDCD00	,
+          #8B8B00	,
+          #CD2990	,
+          #8B1C62	,
+          #FF3E96	,
+          #EE3A8C	,
+          #CD3278	,
+          #8B2252	,
+          #FF00FF	,
+          #EE00EE	,
+          #CD00CD	,
+          #8B008B	,
+          #FF83FA	,
+          #EE7AE9	,
+          #CD69C9	,
+          #8B4789	,
+          #FFBBFF	,
+          #EEAEEE	,
+          #CD96CD	,
+          #8B668B	,
+          #E066FF	,
+          #D15FEE	,
+          #B452CD	,
+          #7A378B	,
+          #BF3EFF	,
+          #B23AEE	,
+          #9A32CD	,
+          #68228B	,
+          #9B30FF	,
+          #912CEE	,
+          #7D26CD	,
+          #551A8B	,
+          #AB82FF	,
+          #9F79EE	,
+          #8968CD	,
+          #5D478B	,
+          #FFE1FF	,
+          #EED2EE	,
+          #CDB5CD);
+        background-repeat: no-repeat;
+      }
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.7)
+      }
+
+      .bubble {
+        position: absolute;
+        top: 100vh;
+        animation: move 10s linear infinite;
+      }
+
+      @keyframes move {
+        from {
+          top: 100%;
+        }
+        to {
+          top: -100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 200 200" width="150" height="150" style="position: absolute;">
+      <defs id="effects">
+
+        <linearGradient id="main-gradient--colors-1"
+          x1="0" y1="100%"
+          x2="100%" y2="0">
+          <stop offset="0%"
+            stop-color="dodgerblue"/>
+          <stop offset="50%"
+            stop-color="fuchsia"/>
+          <stop offset="100%"
+            stop-color="yellow"/>
+        </linearGradient>
+        <linearGradient id="main-gradient--colors-2"
+          x1="0" y1="100%"
+          x2="100%" y2="0">
+          <stop offset="6%"
+            stop-color="MediumVioletRed"/>
+          <stop offset="40%"
+            stop-color="DarkTurquoise"/>
+          <stop offset="99%"
+            stop-color="gold"/>
+        </linearGradient>
+        <linearGradient id="main-gradient--colors-3"
+          x1="0" y1="100%"
+          x2="100%" y2="0">
+          <stop offset="30%"
+            stop-color="red"/>
+          <stop offset="90%"
+            stop-color="blue"/>
+          <stop offset="100%"
+            stop-color="lime"/>
+        </linearGradient>
+        <linearGradient id="main-gradient--colors-4"
+          x1="0" y1="100%"
+          x2="100%" y2="0">
+          <stop offset="0%"
+            stop-color="orangered"/>
+          <stop offset="70%"
+            stop-color="crimson"/>
+          <stop offset="100%"
+            stop-color="MediumSlateBlue"/>
+        </linearGradient>
+
+        <radialGradient id="gradient--colors-transparency"
+          fx="25%" fy="25%">
+          <stop offset="30%"
+                stop-color="black"
+                stop-opacity=".2"/>
+          <stop offset="97%"
+                stop-color="white"
+                stop-opacity=".4"/>
+          <stop offset="100%"
+                stop-color="black"/>
+        </radialGradient>
+
+        <mask id="mask--colors-transparency">
+          <rect fill="url(#gradient--colors-transparency)"
+            width="100%" height="100%">
+          </rect>
+        </mask>
+
+        <radialGradient id="gradient--bw-light" fy="10%">
+          <stop offset="60%"
+                stop-color="black"
+                stop-opacity="0"/>
+          <stop offset="90%"
+                stop-color="white"
+                stop-opacity=".25"/>
+          <stop offset="100%"
+                stop-color="black"/>
+        </radialGradient>
+
+        <mask id="mask--light-bottom">
+          <rect fill="url(#gradient--bw-light)"
+            width="100%" height="100%">
+          </rect>
+        </mask>
+        <mask id="mask--light-top">
+          <rect fill="url(#gradient--bw-light)"
+            width="100%" height="100%"
+            transform="rotate(180, 100, 100)">
+          </rect>
+        </mask>
+
+        <radialGradient id="gradient--spot" fy="20%">
+          <stop offset="10%" stop-color="white" stop-opacity=".7"/>
+          <stop offset="70%" stop-color="white" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <defs>
+        <symbol id="bubble-1" viewBox="0 0 200 200">
+
+          <ellipse rx="40" ry="20" cx="150" cy="150" fill="url(#gradient--spot)"
+            transform="rotate(-225, 150, 150)"></ellipse>
+
+          <circle r="50%" cx="50%" cy="50%"
+            fill="url(#main-gradient--colors-1)"
+            mask="url(#mask--colors-transparency)">
+          </circle>
+
+          <circle r="50%" cx="50%" cy="50%" fill="aqua"
+            mask="url(#mask--light-bottom)">
+          </circle>
+          <circle r="50%" cx="50%" cy="50%" fill="yellow"
+            mask="url(#mask--light-top)">
+          </circle>
+
+          <ellipse rx="65" ry="25" cx="55" cy="55" fill="url(#gradient--spot)"
+            transform="rotate(-45, 55, 55)"></ellipse>
+        </symbol>
+        <symbol id="bubble-2" viewBox="0 0 200 200">
+
+          <ellipse rx="40" ry="20" cx="150" cy="150" fill="url(#gradient--spot)"
+            transform="rotate(-225, 150, 150)"></ellipse>
+
+          <circle r="50%" cx="50%" cy="50%"
+            fill="url(#main-gradient--colors-2)"
+            mask="url(#mask--colors-transparency)">
+          </circle>
+
+          <circle r="50%" cx="50%" cy="50%" fill="aqua"
+            mask="url(#mask--light-bottom)">
+          </circle>
+          <circle r="50%" cx="50%" cy="50%" fill="yellow"
+            mask="url(#mask--light-top)">
+          </circle>
+
+          <ellipse rx="65" ry="25" cx="55" cy="55" fill="url(#gradient--spot)"
+            transform="rotate(-45, 55, 55)"></ellipse>
+        </symbol>
+        <symbol id="bubble-3" viewBox="0 0 200 200">
+
+          <ellipse rx="40" ry="20" cx="150" cy="150" fill="url(#gradient--spot)"
+            transform="rotate(-225, 150, 150)"></ellipse>
+
+          <circle r="50%" cx="50%" cy="50%"
+            fill="url(#main-gradient--colors-3)"
+            mask="url(#mask--colors-transparency)">
+          </circle>
+
+          <circle r="50%" cx="50%" cy="50%" fill="aqua"
+            mask="url(#mask--light-bottom)">
+          </circle>
+          <circle r="50%" cx="50%" cy="50%" fill="yellow"
+            mask="url(#mask--light-top)">
+          </circle>
+
+          <ellipse rx="65" ry="25" cx="55" cy="55" fill="url(#gradient--spot)"
+            transform="rotate(-45, 55, 55)"></ellipse>
+        </symbol>
+        <symbol id="bubble-4" viewBox="0 0 200 200">
+
+          <ellipse rx="40" ry="20" cx="150" cy="150" fill="url(#gradient--spot)"
+            transform="rotate(-225, 150, 150)"></ellipse>
+
+          <circle r="50%" cx="50%" cy="50%"
+            fill="url(#main-gradient--colors-4)"
+            mask="url(#mask--colors-transparency)">
+          </circle>
+
+          <circle r="50%" cx="50%" cy="50%" fill="aqua"
+            mask="url(#mask--light-bottom)">
+          </circle>
+          <circle r="50%" cx="50%" cy="50%" fill="yellow"
+            mask="url(#mask--light-top)">
+          </circle>
+
+          <ellipse rx="65" ry="25" cx="55" cy="55" fill="url(#gradient--spot)"
+            transform="rotate(-45, 55, 55)"></ellipse>
+        </symbol>
+      </defs>
+    </svg>
+    <div class="container">
+      <svg width="200" height="200" class="bubble one"><use xlink:href="#bubble-1"/></svg>
+      <svg width="100" height="100" class="bubble two"><use xlink:href="#bubble-2"/></svg>
+      <svg width="30" height="30" class="bubble three"><use xlink:href="#bubble-3"/></svg>
+      <svg width="50" height="80"  class="bubble four"><use xlink:href="#bubble-4"/></svg>
+      <svg width="300" height="300" class="bubble five"><use xlink:href="#bubble-1"/></svg>
+      <svg width="400" height="400" class="bubble five"><use xlink:href="#bubble-3"/></svg>
+      <svg width="180" height="180" class="bubble six"><use xlink:href="#bubble-2"/></svg>
+      <svg width="100" height="100" class="bubble two"><use xlink:href="#bubble-4"/></svg>
+      <svg width="30" height="30" class="bubble three"><use xlink:href="#bubble-2"/></svg>
+      <svg width="50" height="80"  class="bubble four"><use xlink:href="#bubble-3"/></svg>
+    </div>
+    <script>
+      var bubble = document.querySelectorAll('.bubble');
+      var body = document.querySelector('body');
+      // var gradientSVG = document.guerySelectorAll('id*='main-gradient-colors-');
+      for (let i = 0; i < bubble.length; i++) {
+        bubble[i].style.left = 20 + (i * Math.floor(Math.random()*12)) + '%';
+        if(+(bubble[i].style.left).slice(0, -1) > 75) {
+          bubble[i].style.left = '75%';
+        }
+        bubble[i].style.animationDelay = i * Math.floor(Math.random()*5) + 's';
+      }
+    /*  var colorArr = [
+        ['dodgerblue', 'DarkTurquoise', 'blue', 'MediumSlateBlue'],
+        ['fuchsia', 'MediumVioletRed', 'red', 'crimson'],
+        ['yellow', 'gold', 'orange', 'Moccasin']
+      ];
+      function setGradientColors() {
+        Array.from(gradientSVG).forEach((item, index) => {
+          item.setAttribute('stop-color', colorArr[index][Math.floor(Math.random() * colorArr[index].length)]);
+        });
+      }
+      setGradientColors();
+    */
+    </script>
+  </body>
+</html>
